@@ -42,8 +42,9 @@ NUM_OF_IDEAS.times do
         )
         if i.valid?
             i.reviews = rand(0..15).times.map do 
-                Review.new(
-                    body: Faker::GreekPhilosophers.quote
+                Review.create(
+                    body: Faker::GreekPhilosophers.quote,
+                    user: users.sample
                 )
             end
         end
