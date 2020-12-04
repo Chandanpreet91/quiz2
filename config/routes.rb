@@ -3,5 +3,8 @@ Rails.application.routes.draw do
  
  
   get '/', {to: 'ideas#index', as: :root}
+
   resources :ideas 
+
+  resource :session, only: [:new, :create, :destroy]
 end
