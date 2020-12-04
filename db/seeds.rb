@@ -7,10 +7,30 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-
-
 Idea.delete_all
+User.delete_all
 NUM_OF_IDEAS = 50
+NUM_OF_USERS = 10
+PASSWORD = 'supersecret'
+
+super_user = User.create(
+    first_name: 'Jon',
+    last_name: 'Snow',
+    email:"js@winterfell.gov",
+    password: PASSWORD
+)
+
+
+
+NUM_OF_USERS.times do 
+      User.create(
+      first_name: Faker::Games::SuperSmashBros.fighter,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      password: PASSWORD
+      )
+    end
+
 
 NUM_OF_IDEAS.times do 
     created_at = Faker::Date.backward(days:365*5)
@@ -25,5 +45,6 @@ end
 
 
 ideas = Idea.all
-
+users = User.all 
 puts Cowsay.say("Generated #{ideas.count} ideas", :bunny)
+puts Cowsay.say("Generated #{users.count} users", :frogs)

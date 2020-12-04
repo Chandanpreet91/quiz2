@@ -3,7 +3,7 @@ class IdeasController < ApplicationController
    # before_action :authenticate_user!, except: [:index, :show]
     
     def index
-       @ideas = Idea.all 
+        @ideas = Idea.order(created_at: :DESC)
     end
     
     def new
