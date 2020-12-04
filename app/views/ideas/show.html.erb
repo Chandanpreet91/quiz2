@@ -17,6 +17,42 @@
  method: :delete , data: {confirm:  "Are you sure?"},class: "btn btn-danger"%>
  </div>
  </div>
- <hr />
+ 
+<%= form_with model: [@idea, @review], local: true do |f| %>
+    <% if @review.errors.any? %>
+    <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+            <li class="text-danger"><%= msg %></li>
+        <% end %>
+    </ul>
+    <% end %>
+     <div class='form-group'>
+      <%= f.label :reviews %>
+      <%= f.text_area(:body, class: 'form-control',cols: 50,rows: 5, placeholder: 'Your thoughts here' )%>
+     </div>
+     <%= f.submit class: 'btn btn-primary' %>
+ 
+    <div>
+    <ul class = "List-group answer-List">
+         <% @reviews.each do |review| %>
+         <li class= "list-group-item">
+            <%= review.body %>
+            <p>
+            Reviewed <%= time_ago_in_words(review.created_at)%>
+            <%= link_to(
+                "Delete",
+                idea_review_path(@idea, review),
+                method: :delete,
+                data: {
+                confirm: "are you sure you want to delete this delete?"
+                 },
+                class: "btn btn-danger btn-sm"
+            )%>
+        <% end %>
+            </p>
+        </li>
+    
+    <% end %>
+</ul>
 
 

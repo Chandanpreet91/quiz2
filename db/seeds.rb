@@ -9,6 +9,7 @@
 
 Idea.delete_all
 User.delete_all
+Review.delete_all
 NUM_OF_IDEAS = 50
 NUM_OF_USERS = 10
 PASSWORD = 'supersecret'
@@ -19,8 +20,6 @@ super_user = User.create(
     email:"js@winterfell.gov",
     password: PASSWORD
 )
-
-
 
 NUM_OF_USERS.times do 
       User.create(
@@ -34,18 +33,27 @@ users = User.all
 
 NUM_OF_IDEAS.times do 
     created_at = Faker::Date.backward(days:365*5)
-         Idea.create(
+        i = Idea.create(
             title: Faker::Company.catch_phrase,
             description: Faker::Lorem.paragraph, 
             created_at:created_at,
             updated_at:created_at,
             user: users.sample
         )
+        if i.valid?
+            i.reviews = rand(0..15).times.map do 
+                Review.new(
+                    body: Faker::GreekPhilosophers.quote
+                )
+            end
+        end
       
 end
 
 
 ideas = Idea.all
+reviews = Review.all
 
 puts Cowsay.say("Generated #{ideas.count} ideas", :bunny)
 puts Cowsay.say("Generated #{users.count} users", :frogs)
+puts Cowsay.say("Generated #{reviews.count} reviews", :tux)
