@@ -39,6 +39,7 @@
             <%= review.body %>
             <p>
             Reviewed <%= time_ago_in_words(review.created_at)%>
+            <%if can?(:crud, review) %>
             <%= link_to(
                 "Delete",
                 idea_review_path(@idea, review),
@@ -47,9 +48,11 @@
                 confirm: "are you sure you want to delete this delete?"
                  },
                 class: "btn btn-danger btn-sm"
-            )%>
+            )%> 
+            <% end %>
         <% end %>
             </p>
+            
         </li>
     
     <% end %>
