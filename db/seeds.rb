@@ -30,7 +30,7 @@ NUM_OF_USERS.times do
       password: PASSWORD
       )
     end
-
+users = User.all
 
 NUM_OF_IDEAS.times do 
     created_at = Faker::Date.backward(days:365*5)
@@ -39,12 +39,13 @@ NUM_OF_IDEAS.times do
             description: Faker::Lorem.paragraph, 
             created_at:created_at,
             updated_at:created_at,
+            user: users.sample
         )
       
 end
 
 
 ideas = Idea.all
-users = User.all 
+
 puts Cowsay.say("Generated #{ideas.count} ideas", :bunny)
 puts Cowsay.say("Generated #{users.count} users", :frogs)
