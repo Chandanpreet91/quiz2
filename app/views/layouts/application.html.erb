@@ -11,38 +11,15 @@
   </head>
 
   <body>
-  
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Ideas</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
-    </ul>
-    <ul class="navbar-nav navigation-links ">
-        <li class="nav-item">
-         <%= link_to  "Ideas", ideas_path %>
-         </li>
-        <li class="nav-item">
-         <%= link_to  "New Idea", new_idea_path %>
-         </li>
-         |
-         <li class="nav-item">
-          <%= link_to  "Sign In", new_session_path %>
-         </li>
-         </ul>
+    <%= render 'shared/navbar' %>
+    <div class ="container">
+      <% flash.each do |type, message| %>
+        <div class = 'bg-<%= type %> p-3 rounded mb-2 shadow-sm'>
+      <%= message %>
     </div>
-</nav>
-<div class ="container">
-<% flash.each do |type, message| %>
-  <div class = 'bg-<%= type %> p-3 rounded mb-2 shadow-sm'>
-  <%= message %>
-</div>
-<%end %>
+    <%end %>
   <hr />
-  <div class="container">
+    <div class="container">
     <%= yield %>
   
   </body>
