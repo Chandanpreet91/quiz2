@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe IdeasController, type: :controller do
+    before do 
+     current_user = FactoryBot.create(:user)
+     session[:user_id] = current_user.id 
+    end
     describe "#new" do 
         it "renders the new template" do 
             #Given
@@ -10,7 +14,7 @@ RSpec.describe IdeasController, type: :controller do
             #then
                 expect(response).to(render_template(:new))
         end
-        it "sets an instance variable with a new job post" do 
+        it "sets an instance variable with a new idea " do 
                 get(:new)
 
                 expect(assigns(:idea)).to(be_a_new(Idea))

@@ -17,7 +17,7 @@
          </li>
          <% if user_signed_in? %>
         <li class="nav-item">
-           <%= current_user.first_name %>
+           <%= current_user.full_name %>
            <%= link_to  "Sign Out", session_path,method: :delete %>
          </li>
          <% else %>

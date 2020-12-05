@@ -5,7 +5,6 @@ class IdeasController < ApplicationController
     
     def index
         @ideas = Idea.order(created_at: :DESC)
-        @like = @ideas.likes.find_by(user: current_user)
     end
     
     def new
@@ -41,9 +40,15 @@ class IdeasController < ApplicationController
      end
      
      def destroy 
-        flash[:notice] = "Question destroyed"
-        @idea.destroy
-        redirect_to ideas_path 
+        if can?(:destroy,@idea)
+         @idea.destroy
+         flash[:notice] = "Question destroyed"
+         redirect_to ideas_path 
+        else
+         flash[:danger] = "Access Denied"
+         redirect_to idea_path(@idea.id)
+        end
+        
      end
 
 
