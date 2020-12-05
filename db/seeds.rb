@@ -10,6 +10,8 @@
 Idea.delete_all
 User.delete_all
 Review.delete_all
+
+
 NUM_OF_IDEAS = 50
 NUM_OF_USERS = 10
 PASSWORD = 'supersecret'
@@ -18,7 +20,8 @@ super_user = User.create(
     first_name: 'Jon',
     last_name: 'Snow',
     email:"js@winterfell.gov",
-    password: PASSWORD
+    password: PASSWORD,
+    is_admin: true 
 )
 
 NUM_OF_USERS.times do 
