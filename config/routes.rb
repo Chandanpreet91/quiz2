@@ -3,9 +3,9 @@ Rails.application.routes.draw do
  
  
   get '/', {to: 'ideas#index', as: :root}
-
+  post '/',{to: 'ideas#index', as: :index_root}
   resources :ideas do 
-    resources :likes, shallow: true, only: [:create, :destroy]
+    resources :likes, shallow: true, only: [:create,:destroy]
     resources :reviews, only: [:create, :destroy]
   end
   resources :users, only: [:new, :create]
