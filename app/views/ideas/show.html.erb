@@ -12,10 +12,12 @@
 <p><%= @idea.created_at %></p>
 <div>
   <strong>By <%= @idea.user.first_name%> </strong>
+  <% if can? :crud, @idea%>  
 <%= link_to  "Edit", edit_idea_path(@idea),class: "btn btn-info" %>
 <%= link_to  "Delete", idea_path(@idea) ,
  method: :delete , data: {confirm:  "Are you sure?"},class: "btn btn-danger"%>
  </div>
+ <% end %>
  </div>
  
 <%= form_with model: [@idea, @review], local: true do |f| %>

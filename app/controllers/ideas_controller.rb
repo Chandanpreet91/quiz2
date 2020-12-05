@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
     before_action :find_idea, only: [:show,:edit,:update,:destroy]
     before_action :authenticate_user!, except: [:index, :show]
+    before_action :authorize!, only: [:edit, :update, :destroy]
     
     def index
         @ideas = Idea.order(created_at: :DESC)
@@ -39,8 +40,8 @@ class IdeasController < ApplicationController
      end
      
      def destroy 
-        @idea.destroy
         flash[:notice] = "Question destroyed"
+        @idea.destroy
         redirect_to ideas_path 
      end
 
@@ -51,6 +52,9 @@ class IdeasController < ApplicationController
      end
      def find_idea
         @idea = Idea.find params[:id]
+    end
+    def authorize!
+        redirect_to root_path, alert: 'Not Authorized' unless can?(:crud,@idea)
     end
    
 end
